@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم مدیریت تأمین‌کنندگان پت‌شاپ</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+    <style>
+        /* Reset و فونت فارسی */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Vazir, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* کارت فرم */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* عنوان فرم */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4a6fa5;
+        }
+
+        /* بخش‌های فرم */
+        .form-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px dashed #ddd;
+            border-radius: 8px;
+        }
+        .form-section h2 {
+            margin-bottom: 15px;
+            color: #6c757d;
+            font-size: 1.2em;
+        }
+
+        /* استایل اینپوت‌ها */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Vazir, sans-serif;
+        }
+        input:focus, select:focus {
+            border-color: #4a6fa5;
+            outline: none;
+        }
+
+        /* دکمه‌ها */
+        button {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Vazir, sans-serif;
+            margin-top: 10px;
+        }
+        button:hover { background: #3a5a80; }
+
+        /* جدول محصولات */
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .products-table th, .products-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .products-table th {
+            background: #f8f9fa;
+        }
+        .products-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* بخش افزودن محصول جدید */
+        #newProductForm {
+            display: none;
+            margin-top: 20px;
+        }
+        #toggleNewProduct {
+            background: #28a745;
+            margin-bottom: 15px;
+        }
+        #toggleNewProduct:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>فرم ثبت تأمین‌کننده جدید</h1>
+
+        <!-- بخش اطلاعات تأمین‌کننده -->
+        <div class="form-section">
+            <h2>اطلاعات تأمین‌کننده</h2>
+            <input type="text" id="supplierName" placeholder="نام تأمین‌کننده" required>
+            <input type="tel" id="supplierPhone" placeholder="شماره موبایل (مثال: 09123456789)" required>
+            <select id="supplierProvince" required>
+                <option value="">انتخاب استان</option>
+                <option value="تهران">تهران</option>
+                <option value="خراسان رضوی">خراسان رضوی</option>
+                <option value="اصفهان">اصفهان</option>
+                <!-- سایر استان‌ها -->
+            </select>
+            <input type="text" id="supplierCity" placeholder="شهر" required>
+        </div>
+
+        <!-- بخش محصولات موجود -->
+        <div class="form-section">
+            <h2>محصولات موجود</h2>
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>انتخاب</th>
+                        <th>نام محصول</th>
+                        <th>برند</th>
+                        <th>قیمت تأمین‌کننده (تومان)</th>
+                        <th>حاشیه سود (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="productsList">
+                    <!-- محصولات از Google Sheets لود می‌شوند -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- دکمه افزودن محصول جدید -->
+        <button id="toggleNewProduct">+ افزودن محصول جدید</button>
+
+        <!-- فرم افزودن محصول جدید (مخفی است) -->
+        <div id="newProductForm">
+            <div class="form-section">
+                <h2>محصول جدید</h2>
+                <input type="text" id="newProductName" placeholder="نام محصول">
+                <input type="text" id="newProductBrand" placeholder="برند">
+                <select id="newProductAnimal">
+                    <option value="">نوع حیوان</option>
+                    <option value="گربه">گربه</option>
+                    <option value="سگ">سگ</option>
+                </select>
+                <input type="number" id="newProductPrice" placeholder="قیمت (تومان)">
+                <input type="number" id="newProductProfit" placeholder="حاشیه سود (%)">
+                <button id="addNewProduct">ثبت محصول</button>
+            </div>
+        </div>
+
+        <!-- دکمه ثبت نهایی -->
+        <button id="submitForm">ثبت اطلاعات تأمین‌کننده</button>
+    </div>
+
+    <script>
+        // اینجا کد JavaScript برای اتصال به Google Sheets قرار می‌گیرد
+        document.getElementById('toggleNewProduct').addEventListener('click', function() {
+            const form = document.getElementById('newProductForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
