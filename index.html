@@ -1,21 +1,80 @@
-
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فرم مدیریت تأمین‌کنندگان پت‌شاپ</title>
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
-<style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Vazir, sans-serif; background: #f5f5f5; padding: 15px; color: #333; display: flex; justify-content: center; min-height: 100vh; }
-    .form-container { width: 100%; max-width: 700px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; }
-    h1 { text-align: center; margin-bottom: 20px; color: #4a6fa5; font-size: 1.5em; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم مدیریت تأمین‌کنندگان پت‌شاپ</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+  <style>
+    * { 
+        box-sizing: border-box; 
+        margin: 0; 
+        padding: 0;
+        font-family: Vazir, sans-serif; /* اضافه شدن فونت وزیر */
+    }
+    
+    body {
+        font-family: Vazir, sans-serif; /* فونت وزیر برای بدنه */
+        background: #f5f5f5; 
+        padding: 15px; 
+        color: #333; 
+        display: flex; 
+        justify-content: center; 
+        min-height: 100vh;
+    }
+    
+    .form-container {
+        width: 100%; 
+        max-width: 700px; 
+        background: white; 
+        padding: 20px; 
+        border-radius: 10px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        display: flex; 
+        flex-direction: column;
+        font-family: Vazir, sans-serif; /* فونت وزیر */
+    }
+    
+    h1 {
+        font-family: Vazir, sans-serif; /* فونت وزیر */
+        text-align: center; 
+        margin-bottom: 20px; 
+        color: #4a6fa5; 
+        font-size: 1.5em;
+    }
+    
+    input, select {
+        font-family: Vazir, sans-serif; /* فونت وزیر */
+    }
+    
+    button {
+        font-family: Vazir, sans-serif; /* فونت وزیر */
+        transition: all 0.2s ease; /* اثر انتقال نرم برای هاور */
+    }
+    
+    button:hover {
+        transform: translateY(-1px); /* حرکت جزئی هنگام هاور */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* سایه هنگام هاور */
+    }
+    
+    .tab {
+        font-family: Vazir, sans-serif; /* فونت وزیر */
+        transition: all 0.2s ease; /* اثر انتقال نرم */
+    }
+    
+    .tab:hover {
+        transform: translateY(-1px); /* حرکت جزئی هنگام هاور */
+    }
+    
+    .products-table {
+        font-family: Vazir, sans-serif; /* فونت وزیر */
+    }
+    
+    /* بقیه استایل‌ها بدون تغییر باقی می‌مانند */
     .form-section { margin-bottom: 20px; padding: 15px; border: 1px dashed #ddd; border-radius: 8px; }
     input, select { width: 100%; padding: 10px; margin-top: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em; }
     input:focus, select:focus { border-color: #4a6fa5; outline: none; }
-    button { background: #4a6fa5; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-size: 1em; margin-top: 15px; transition: background 0.3s; }
-    button:hover { background: #3a5a80; }
+    button { background: #4a6fa5; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-size: 1em; margin-top: 15px; }
     .tabs { display: flex; margin-bottom: 10px; gap: 5px; }
     .tab { flex: 1; text-align: center; padding: 10px; background: #eee; cursor: pointer; border-radius: 5px; }
     .tab.active { background: #4a6fa5; color: white; }
@@ -30,134 +89,225 @@
 </style>
 </head>
 <body>
-<div class="form-container">
-    <h1>فرم مدیریت تأمین‌کنندگان پت‌شاپ</h1>
-    <div class="form-section">
-        <input type="text" id="supplierName" placeholder="نام تأمین‌کننده">
-        <input type="tel" id="supplierPhone" placeholder="شماره موبایل">
-        <select id="supplierProvince">
-            <option value="">استان</option>
-            <option>تهران</option>
-            <option>خراسان رضوی</option>
-            <option>اصفهان</option>
-            <option>البرز</option>
-        </select>
-        <input type="text" id="supplierCity" placeholder="شهر">
-    </div>
-    <div class="tabs">
-        <div class="tab active" data-tab="productsTab">محصولات موجود</div>
-        <div class="tab" data-tab="addProductTab">افزودن محصول</div>
-    </div>
-    <div id="productsTab" class="tab-content active">
-        <div class="search-container">
-            <input type="text" id="productSearch" placeholder="جستجوی محصول...">
-        </div>
-        <div class="products-wrapper">
-            <table class="products-table">
-                <thead>
-                    <tr>
-                        <th width="40px">انتخاب</th>
-                        <th>نام محصول</th>
-                        <th>برند</th>
-                        <th>نوع حیوان</th>
-                        <th>قیمت</th>
-                        <th>سود (%)</th>
-                    </tr>
-                </thead>
-                <tbody id="productsList"></tbody>
-            </table>
-        </div>
-    </div>
-    <div id="addProductTab" class="tab-content">
+    <div class="form-container">
+        <h1>فرم مدیریت تأمین‌کنندگان پت‌شاپ</h1>
+
+        <!-- بخش اطلاعات تأمین‌کننده -->
         <div class="form-section">
-            <input type="text" id="newProductName" placeholder="نام محصول">
-            <input type="text" id="newProductBrand" placeholder="برند">
-            <select id="newProductAnimal">
-                <option value="">نوع حیوان</option>
-                <option value="گربه">گربه</option>
-                <option value="سگ">سگ</option>
+            <h2>اطلاعات تأمین‌کننده (اختیاری)</h2>
+            <input type="text" id="supplierName" placeholder="نام تأمین‌کننده">
+            <input type="tel" id="supplierPhone" placeholder="شماره موبایل">
+            
+            <select id="supplierProvince">
+                <option value="">انتخاب استان (اختیاری)</option>
+                <option value="تهران">تهران</option>
+                <option value="اصفهان">اصفهان</option>
+                <option value="البرز">البرز</option>
             </select>
-            <button id="addNewProduct">افزودن محصول</button>
+            
+            <input type="text" id="supplierCity" placeholder="شهر">
         </div>
+
+        <!-- تب‌ها -->
+        <div class="tabs">
+            <div class="tab active" data-tab="products">محصولات موجود</div>
+            <div class="tab" data-tab="addProduct">افزودن محصول</div>
+        </div>
+
+        <!-- محتوای تب محصولات موجود -->
+        <div id="productsTab" class="tab-content active">
+            <!-- کادر جستجو -->
+            <div class="search-container">
+                <input type="text" id="productSearch" placeholder="جستجوی محصول...">
+            </div>
+            
+            <!-- جدول محصولات -->
+            <div class="products-wrapper">
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th width="60px">انتخاب</th>
+                            <th>نام محصول</th>
+                            <th>برند</th>
+                            <th>دسته‌بندی</th>
+                            <th>نوع حیوان</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsList">
+                        <!-- محصولات از طریق JavaScript لود می‌شوند -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- محتوای تب افزودن محصول -->
+        <div id="addProductTab" class="tab-content">
+            <div class="form-section">
+                <input type="text" id="newProductName" placeholder="نام محصول">
+                <input type="text" id="newProductBrand" placeholder="برند">
+                
+                <select id="newProductCategory">
+                    <option value="">دسته‌بندی</option>
+                    <option value="تشویقی">تشویقی</option>
+                    <option value="غذای خشک">غذای خشک</option>
+                    <option value="غذا">غذا</option>
+                    <option value="لوازم جانبی">لوازم جانبی</option>
+                    <option value="بهداشتی">بهداشتی</option>
+                </select>
+                
+                <select id="newProductAnimal">
+                    <option value="">نوع حیوان</option>
+                    <option value="گربه">گربه</option>
+                    <option value="سگ">سگ</option>
+                </select>
+                
+                <button id="addNewProduct">ثبت محصول</button>
+            </div>
+        </div>
+
+        <!-- دکمه ثبت نهایی -->
+        <button id="submitForm" style="margin-top: auto;">ثبت اطلاعات</button>
     </div>
-    <button id="submitForm">ثبت اطلاعات</button>
-</div>
-<script>
-let allProducts = [];
-function setupTabs() {
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            tab.classList.add('active');
-            document.getElementById(tab.dataset.tab).classList.add('active');
+
+    <!-- اسکریپت‌های جاوااسکریپت -->
+    <script>
+        // متغیرهای جهانی
+        let allProducts = [];
+        
+        // تابع تغییر تب‌ها
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // حذف کلاس active از همه تب‌ها
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // اضافه کردن کلاس active به تب انتخاب شده
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}Tab`).classList.add('active');
+                });
+            });
+        }
+        
+        // تابع لود محصولات نمونه
+        function loadSampleProducts() {
+            allProducts = [
+                {id: 1, name: "غذای خشک گربه", brand: "رویال کانین", category: "غذای خشک", animal: "گربه"},
+                {id: 2, name: "بیسکویت سگ", brand: "پدیکوری", category: "تشویقی", animal: "سگ"},
+                {id: 3, name: "غذای ماهی", brand: "تترا", category: "غذا", animal: "ماهی"},
+                {id: 4, name: "چوب دندانگیر", brand: "پت‌شاپ", category: "لوازم جانبی", animal: "همستر"}
+            ];
+            renderProducts(allProducts);
+        }
+        
+        // تابع نمایش محصولات
+        function renderProducts(products) {
+            const tableBody = document.getElementById('productsList');
+            tableBody.innerHTML = '';
+            
+            if (products.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center;">محصولی یافت نشد</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td><input type="checkbox" class="product-check" id="product-${product.id}"></td>
+                    <td>${product.name}</td>
+                    <td>${product.brand}</td>
+                    <td>${product.category || '-'}</td>
+                    <td>${product.animal}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+        
+        // تابع جستجو
+        document.getElementById('productSearch').addEventListener('input', function(e) {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = allProducts.filter(product => 
+                (product.name && product.name.toLowerCase().includes(keyword)) || 
+                (product.brand && product.brand.toLowerCase().includes(keyword)) || 
+                (product.category && product.category.toLowerCase().includes(keyword)) ||
+                (product.animal && product.animal.toLowerCase().includes(keyword))
+            );
+            renderProducts(filtered);
         });
-    });
-}
-function loadSampleProducts() {
-    allProducts = [
-        {id: 1, name: "غذای خشک گربه", brand: "رویال کانین", animal: "گربه"},
-        {id: 2, name: "بیسکویت سگ", brand: "پدیکوری", animal: "سگ"}
-    ];
-    renderProducts(allProducts);
-}
-function renderProducts(products) {
-    const tableBody = document.getElementById('productsList');
-    tableBody.innerHTML = '';
-    if (products.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="6">محصولی یافت نشد</td></tr>`;
-        return;
-    }
-    products.forEach(p => {
-        const row = `<tr>
-            <td><input type="checkbox" id="product-${p.id}" class="product-check"></td>
-            <td>${p.name}</td>
-            <td>${p.brand}</td>
-            <td>${p.animal}</td>
-            <td><input type="number" id="price-${p.id}" placeholder="قیمت"></td>
-            <td><input type="number" id="profit-${p.id}" placeholder="درصد"></td>
-        </tr>`;
-        tableBody.innerHTML += row;
-    });
-}
-document.getElementById('productSearch').addEventListener('input', (e) => {
-    const keyword = e.target.value.toLowerCase();
-    const filtered = allProducts.filter(p => p.name.toLowerCase().includes(keyword) || p.brand.toLowerCase().includes(keyword));
-    renderProducts(filtered);
-});
-document.getElementById('addNewProduct').addEventListener('click', () => {
-    const name = document.getElementById('newProductName').value;
-    const brand = document.getElementById('newProductBrand').value;
-    const animal = document.getElementById('newProductAnimal').value;
-    if (!name) return alert("نام محصول الزامیست");
-    const newId = allProducts.length ? Math.max(...allProducts.map(p => p.id)) + 1 : 1;
-    allProducts.push({id: newId, name, brand, animal});
-    renderProducts(allProducts);
-});
-document.getElementById('submitForm').addEventListener('click', () => {
-    const selected = [];
-    document.querySelectorAll('.product-check:checked').forEach(checkbox => {
-        const id = checkbox.id.split('-')[1];
-        const price = document.getElementById(`price-${id}`).value;
-        const profit = document.getElementById(`profit-${id}`).value;
-        const product = allProducts.find(p => p.id == id);
-        selected.push({...product, price, profit});
-    });
-    const supplierData = {
-        name: document.getElementById('supplierName').value,
-        phone: document.getElementById('supplierPhone').value,
-        province: document.getElementById('supplierProvince').value,
-        city: document.getElementById('supplierCity').value,
-        products: selected
-    };
-    console.log(supplierData);
-    alert("اطلاعات با موفقیت ذخیره شد!");
-});
-document.addEventListener('DOMContentLoaded', () => {
-    setupTabs();
-    loadSampleProducts();
-});
-</script>
+        
+        // تابع ثبت محصول جدید
+        document.getElementById('addNewProduct').addEventListener('click', function() {
+            const name = document.getElementById('newProductName').value.trim();
+            const brand = document.getElementById('newProductBrand').value.trim();
+            const category = document.getElementById('newProductCategory').value;
+            const animal = document.getElementById('newProductAnimal').value;
+            
+            // اضافه کردن محصول جدید
+            const newId = allProducts.length > 0 ? Math.max(...allProducts.map(p => p.id)) + 1 : 1;
+            const newProduct = {
+                id: newId,
+                name: name || `محصول ${newId}`,
+                brand: brand || 'نامشخص',
+                category: category || 'نامشخص',
+                animal: animal || 'نامشخص'
+            };
+            
+            allProducts.push(newProduct);
+            renderProducts(allProducts);
+            
+            // ریست فرم و بازگشت به تب محصولات
+            document.getElementById('newProductName').value = '';
+            document.getElementById('newProductBrand').value = '';
+            document.getElementById('newProductCategory').value = '';
+            document.getElementById('newProductAnimal').value = '';
+            
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector('.tab[data-tab="products"]').classList.add('active');
+            document.getElementById('productsTab').classList.add('active');
+        });
+        
+        // تابع ثبت نهایی اطلاعات
+        document.getElementById('submitForm').addEventListener('click', function() {
+            const supplierData = {
+                name: document.getElementById('supplierName').value.trim() || 'نامشخص',
+                phone: document.getElementById('supplierPhone').value.trim() || 'نامشخص',
+                province: document.getElementById('supplierProvince').value || 'نامشخص',
+                city: document.getElementById('supplierCity').value.trim() || 'نامشخص',
+                products: []
+            };
+            
+            // جمع‌آوری محصولات انتخاب شده
+            document.querySelectorAll('.product-check:checked').forEach(checkbox => {
+                const id = checkbox.id.split('-')[1];
+                const product = allProducts.find(p => p.id == id);
+                
+                if (product) {
+                    supplierData.products.push({
+                        productId: id,
+                        productName: product.name,
+                        category: product.category
+                    });
+                }
+            });
+            
+            console.log('داده‌های ثبت شده:', supplierData);
+            alert('اطلاعات با موفقیت ثبت شد!');
+        });
+        
+        // بارگذاری اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            setupTabs();
+            loadSampleProducts();
+        });
+    </script>
 </body>
 </html>
