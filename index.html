@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>پنل مدیریت پت‌شاپ</title>
+<title>مدیریت تأمین‌کنندگان پت‌شاپ</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet"/>
 <style>
@@ -19,7 +19,7 @@
       padding: 20px;
       color: #333;
       direction: rtl;
-      transition: all 0.3s;
+      transition: background 0.3s, color 0.3s;
     }
     
     body.dark {
@@ -34,12 +34,22 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      transition: all 0.3s;
     }
     
     .dark .form-container {
       background: #2c2c2c;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    
+    h1 { 
+      text-align: center; 
+      margin: 5px 0 10px;
+      font-size: 1.3rem;
+    }
+    
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
     }
     
     .header-sticky {
@@ -47,204 +57,23 @@
       top: 0;
       background: white;
       z-index: 100;
-      padding: 15px 0;
+      padding: 10px 0;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: all 0.3s;
     }
     
     .dark .header-sticky {
       background: #2c2c2c;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     
-    .page-title {
-      text-align: center;
-      margin: 0;
-      font-size: 1.4rem;
-      color: #3498db;
-      transition: all 0.3s;
-    }
-    
-    .dark .page-title {
-      color: #5dade2;
-    }
-    
-    /* منوی همبرگر پیشرفته */
-    .hamburger-menu {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 1000;
-    }
-    
-    .menu-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-      transition: all 0.5s ease-in-out;
-      background: rgba(255,255,255,0.8);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    
-    .dark .menu-btn {
-      background: rgba(44,44,44,0.8);
-    }
-    
-    .menu-btn__burger {
-      width: 25px;
-      height: 3px;
-      background: #3498db;
-      border-radius: 5px;
-      transition: all 0.5s ease-in-out;
-    }
-    
-    .dark .menu-btn__burger {
-      background: #5dade2;
-    }
-    
-    .menu-btn__burger::before,
-    .menu-btn__burger::after {
-      content: '';
-      position: absolute;
-      width: 25px;
-      height: 3px;
-      background: #3498db;
-      border-radius: 5px;
-      transition: all 0.5s ease-in-out;
-    }
-    
-    .dark .menu-btn__burger::before,
-    .dark .menu-btn__burger::after {
-      background: #5dade2;
-    }
-    
-    .menu-btn__burger::before {
-      transform: translateY(-8px);
-    }
-    
-    .menu-btn__burger::after {
-      transform: translateY(8px);
-    }
-    
-    .menu-btn.open .menu-btn__burger {
-      transform: translateX(-50px);
-      background: transparent;
-    }
-    
-    .menu-btn.open .menu-btn__burger::before {
-      transform: rotate(45deg) translate(35px, -35px);
-    }
-    
-    .menu-btn.open .menu-btn__burger::after {
-      transform: rotate(-45deg) translate(35px, 35px);
-    }
-    
-    .menu-nav {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 300px;
-      height: 100vh;
-      background: #f8f9fa;
-      transition: all 0.3s ease-in-out;
-      padding: 20px;
-      box-shadow: -2px 0 15px rgba(0,0,0,0.1);
-      z-index: 999;
-      overflow-y: auto;
-    }
-    
-    .dark .menu-nav {
-      background: #333;
-      box-shadow: -2px 0 15px rgba(0,0,0,0.3);
-    }
-    
-    .menu-nav.open {
-      right: 0;
-    }
-    
-    .menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 998;
-      display: none;
-    }
-    
-    .menu-overlay.open {
-      display: block;
-    }
-    
-    .logo-container {
-      text-align: center;
-      padding: 15px 0;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .dark .logo-container {
-      border-bottom: 1px solid #444;
-    }
-    
-    .logo {
-      max-width: 80%;
-      max-height: 60px;
-      object-fit: contain;
-    }
-    
-    .menu-nav__item {
-      display: flex;
-      align-items: center;
-      padding: 12px 15px;
-      margin: 8px 0;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.3s;
-      font-size: 0.9rem;
-    }
-    
-    .menu-nav__item:hover {
-      background: #e9ecef;
-    }
-    
-    .dark .menu-nav__item:hover {
-      background: #444;
-    }
-    
-    .menu-nav__item.active {
-      background: #3498db;
-      color: white;
-    }
-    
-    .menu-nav__item .material-icons {
-      margin-left: 10px;
-      font-size: 1.2rem;
-    }
-    
-    /* استایل‌های عمومی */
-    input, select, button, textarea {
+    input, select, button {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
       background: inherit;
       color: inherit;
       font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-    
-    .dark input, 
-    .dark select, 
-    .dark button, 
-    .dark textarea {
-      border-color: #555;
     }
     
     button {
@@ -252,131 +81,118 @@
       color: white;
       border: none;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: background 0.3s;
+    }
+    
+    button:hover { 
+      background: #2980b9; 
+    }
+    
+    .small-btn {
+      padding: 5px 10px;
+      font-size: 0.8em;
+      width: auto;
+      display: inline-block;
+    }
+    
+    .tabs {
+      display: flex;
+      margin: 10px 0;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+    
+    .tab {
+      padding: 8px 12px;
+      cursor: pointer;
+      background: #ecf0f1;
+      margin-left: 5px;
+      border-radius: 5px 5px 0 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 5px;
+      color: #333;
+      font-size: 0.8rem;
     }
     
-    button:hover {
-      background: #2980b9;
+    .tab.active { 
+      background: #3498db; 
+      color: white !important; 
     }
     
-    button .material-icons {
-      margin-left: 5px;
+    .tab[data-tab="cache"] { 
+      background: #f39c12; 
     }
     
-    .action-buttons {
-      display: flex;
-      gap: 10px;
-      margin: 15px 0;
+    .tab[data-tab="cache"].active { 
+      background: #d35400; 
+      color: white !important; 
     }
     
-    .action-buttons button {
-      flex: 1;
+    .tab-content { 
+      display: none; 
+      padding-top: 10px; 
     }
     
-    .search-container {
-      display: flex;
-      gap: 10px;
-      margin: 15px 0;
+    .tab-content.active { 
+      display: block; 
     }
     
-    .search-container input {
-      flex: 1;
+    .products-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.75rem;
+    }
+    
+    .products-table th, 
+    .products-table td {
+      border: 1px solid #ddd;
+      padding: 6px;
+      text-align: center;
+    }
+    
+    .checkbox-large {
+      transform: scale(1.3);
+      margin: 0 auto;
+      display: block;
     }
     
     .divider {
       border-top: 2px dashed #ccc;
-      margin: 20px 0;
-    }
-    
-    .dark .divider {
-      border-color: #555;
-    }
-    
-    /* استایل جداول */
-    .products-table {
-      width: 100%;
-      border-collapse: collapse;
       margin: 15px 0;
-      font-size: 0.8rem;
-      box-shadow: 0 0 5px rgba(0,0,0,0.05);
     }
     
-    .dark .products-table {
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    #addToBasket, #addToBasketNew {
+      background: #27ae60;
     }
     
-    .products-table th {
-      background: #f8f9fa;
-      font-weight: bold;
-      padding: 10px;
-      text-align: center;
+    #addToBasket:hover, #addToBasketNew:hover {
+      background: #219653;
     }
     
-    .dark .products-table th {
-      background: #333;
-    }
-    
-    .products-table td {
-      border: 1px solid #eee;
-      padding: 8px;
-      text-align: center;
-    }
-    
-    .dark .products-table td {
-      border-color: #444;
-    }
-    
-    /* استایل‌های مخصوص تب‌ها */
-    .tab-content {
-      display: none;
-      padding-top: 15px;
-    }
-    
-    .tab-content.active {
-      display: block;
-    }
-    
-    /* استایل‌های سبد */
-    .basket-section {
-      margin: 20px 0;
-      padding: 15px;
-      background: #f8f9fa;
-      border-radius: 8px;
-      transition: all 0.3s;
-    }
-    
-    .dark .basket-section {
-      background: #333;
-    }
-    
-    /* استایل اطلاع‌رسانی */
     .toast {
       position: fixed;
       bottom: 20px;
       right: 20px;
       background: #27ae60;
       color: white;
-      padding: 12px 24px;
-      border-radius: 6px;
+      padding: 10px 20px;
+      border-radius: 4px;
       display: none;
       z-index: 10000;
       font-size: 0.9rem;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
     
     .toast.error {
       background: #e74c3c;
     }
     
-    /* استایل لودر */
     .loader {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; 
+      left: 0; 
+      right: 0; 
       bottom: 0;
       background: rgba(0,0,0,0.7);
       display: none;
@@ -384,374 +200,378 @@
       align-items: center;
       z-index: 9999;
       color: white;
-      flex-direction: column;
+      font-size: 1.2rem;
     }
     
-    .loader.active {
+    .loader.active { 
+      display: flex; 
+    }
+
+    .theme-switch {
       display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
     }
     
-    .loader .material-icons {
-      font-size: 3rem;
-      animation: spin 1s linear infinite;
-      margin-bottom: 15px;
+    .theme-toggle {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
     }
     
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .theme-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
     
-    /* استایل‌های واکنش‌گرا */
+    .theme-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .theme-slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .theme-slider {
+      background-color: #2196F3;
+    }
+    
+    input:checked + .theme-slider:before {
+      transform: translateX(30px);
+    }
+    
+    .theme-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .basket-section {
+      margin: 15px 0;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+    
+    .dark .basket-section {
+      background: #333;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .action-buttons button {
+      flex: 1;
+      font-size: 0.9rem;
+    }
+    
+    .search-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .search-container input {
+      flex: 1;
+      font-size: 0.9rem;
+    }
+    
+    .search-container button {
+      width: auto;
+      padding: 10px 15px;
+      font-size: 0.8rem;
+    }
+    
+    .scrollable-content {
+      max-height: calc(100vh - 250px);
+      overflow-y: auto;
+      padding: 5px;
+    }
+    
+    .price-input, .profit-input {
+      width: 100%;
+      padding: 8px;
+      font-size: 0.9rem;
+      margin: 5px 0;
+    }
+  
+    select option {
+      color: #000 !important;
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 768px) {
-      .form-container {
-        padding: 15px;
+      .tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
       }
       
-      .action-buttons {
-        flex-direction: column;
-      }
-      
-      .search-container {
-        flex-direction: column;
+      .tab {
+        flex: 1 1 45%;
+        min-width: 100px;
+        text-align: center;
+        font-size: 0.7rem;
+        padding: 6px 8px;
       }
       
       .products-table {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
       }
       
       .products-table th, 
       .products-table td {
-        padding: 6px 4px;
+        padding: 4px;
+      }
+      
+      input, select, button {
+        padding: 8px;
+        font-size: 0.8rem;
+      }
+      
+      .price-input, .profit-input {
+        width: 100%;
+        font-size: 0.8rem;
+      }
+      
+      .action-buttons button {
+        font-size: 0.8rem;
+        padding: 8px;
+      }
+      
+      .material-icons {
+        font-size: 18px;
+      }
+      
+      .scrollable-content {
+        max-height: calc(100vh - 220px);
       }
     }
-    
-    /* استایل‌های مخصوص بروزرسانی نرخ */
-    .price-input {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      text-align: center;
-    }
-    
-    .update-btn {
-      background: #27ae60;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    .update-btn:hover {
-      background: #219653;
-    }
-    
-    .supplier-info-box {
-      background: #f8f9fa;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      display: none;
-    }
-    
-    .dark .supplier-info-box {
-      background: #333;
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 </style>
 </head>
 <body>
-<!-- منوی همبرگر -->
-<div class="hamburger-menu">
-  <div class="menu-btn">
-    <div class="menu-btn__burger"></div>
-  </div>
-  <div class="menu-overlay" id="menuOverlay"></div>
-  <nav class="menu-nav">
-    <div class="logo-container">
-      <img src="https://via.placeholder.com/200x60?text=PetShop+Logo" alt="لوگو پت‌شاپ" class="logo" id="companyLogo">
-    </div>
-    
-    <div class="theme-switch" style="margin-bottom: 20px;">
-      <div class="theme-icons" style="justify-content: center;">
-        <span class="material-icons">light_mode</span>
-        <label class="theme-toggle" style="margin: 0 10px;">
-          <input id="darkToggle" type="checkbox"/>
-          <span class="theme-slider"></span>
-        </label>
-        <span class="material-icons">dark_mode</span>
-      </div>
-    </div>
-    
-    <div class="menu-nav__item active" data-tab="supplierReg">
-      <span class="material-icons">person_add</span> ثبت نام تأمین‌کننده
-    </div>
-    <div class="menu-nav__item" data-tab="supplierProducts">
-      <span class="material-icons">inventory</span> محصولات تأمین‌کننده
-    </div>
-    <div class="menu-nav__item" data-tab="addProduct">
-      <span class="material-icons">add_box</span> افزودن محصول جدید
-    </div>
-    <div class="menu-nav__item" data-tab="updateRate">
-      <span class="material-icons">sync</span> بروزرسانی نرخ
-    </div>
-    <div class="menu-nav__item" data-tab="productCache">
-      <span class="material-icons">cached</span> کش محصولات
-    </div>
-  </nav>
-</div>
-
-<!-- لودر -->
 <div class="loader" id="loader">
-  <span class="material-icons">autorenew</span>
-  <h2>در حال پردازش...</h2>
+<div>
+<span class="material-icons" style="font-size: 3rem; animation: spin 1s linear infinite;">autorenew</span>
+<h2>در حال پردازش...</h2>
+</div>
+</div>
+<div class="toast" id="toast">عملیات موفقیت‌آمیز بود</div>
+<div class="form-container">
+<div class="header-sticky">
+<div class="theme-switch">
+<div class="theme-icons">
+<span class="material-icons">light_mode</span>
+<label class="theme-toggle">
+<input id="darkToggle" type="checkbox"/>
+<span class="theme-slider"></span>
+</label>
+<span class="material-icons">dark_mode</span>
+</div>
+</div>
+<h1>مدیریت تأمین‌کنندگان پت‌شاپ</h1>
+<div class="tabs">
+<div class="tab active" data-tab="select"><span class="material-icons">person_add</span> ثبت تأمین‌کننده</div>
+<div class="tab" data-tab="add"><span class="material-icons">add_box</span> افزودن محصول</div>
+<div class="tab" data-tab="update"><span class="material-icons">sync</span> آپدیت نرخ</div>
+<div class="tab" data-tab="cache"><span class="material-icons">cached</span> کش محصولات</div>
+</div>
 </div>
 
-<!-- اطلاع‌رسانی -->
-<div class="toast" id="toast">عملیات موفقیت‌آمیز بود</div>
+<!-- تب ثبت تأمین‌کننده -->
+<div class="tab-content active" id="selectTab">
+<div class="scrollable-content">
+<input id="supplierName" placeholder="نام تأمین‌کننده"/>
+<input id="supplierPhone" placeholder="شماره موبایل">
+<select id="supplierProvince">
+<option value="">انتخاب استان</option>
+<option>تهران</option>
+<option>خراسان رضوی</option>
+<option>اصفهان</option>
+</select>
+<input id="supplierCity" placeholder="شهر"/>
+<div class="divider"></div>
+<div class="action-buttons">
+<button id="submitSupplier"><span class="material-icons">check_circle</span> ثبت نهایی تأمین‌کننده</button>
+</div>
+<div class="basket-section">
+<h3>سبد محصولات</h3>
+<table class="products-table" id="basketTable" style="display:none;">
+<thead>
+<tr>
+<th>نام</th>
+<th>برند</th>
+<th>حیوان</th>
+<th>قیمت</th>
+<th>سود (%)</th>
+<th>حذف</th>
+</tr>
+</thead>
+<tbody id="basketBody"></tbody>
+</table>
+<p id="emptyBasket">سبد محصولات خالی است</p>
+</div>
+<div class="divider"></div>
+<h3>جستجوی محصولات</h3>
+<div class="search-container">
+<input id="productSearch" placeholder="جستجوی نام محصول..."/>
+<input id="brandSearch" placeholder="جستجوی برند..."/>
+<button class="small-btn" id="searchProductsBtn"><span class="material-icons">search</span> جستجو</button>
+</div>
+<button id="addToBasket"><span class="material-icons">add_shopping_cart</span> افزودن به سبد</button>
+<table class="products-table">
+<thead>
+<tr>
+<th>انتخاب</th>
+<th>نام</th>
+<th>برند</th>
+<th>نوع حیوان</th>
+<th>قیمت</th>
+<th>سود (%)</th>
+</tr>
+</thead>
+<tbody id="productResults">
+<tr>
+<td colspan="6">لطفاً ابتدا جستجو کنید</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
-<!-- محتوای اصلی -->
-<div class="form-container">
-  <div class="header-sticky">
-    <h1 class="page-title" id="pageTitle">ثبت نام تأمین‌کننده</h1>
-  </div>
-  
-  <!-- تب ثبت نام تأمین‌کننده -->
-  <div class="tab-content active" id="supplierRegTab">
-    <div class="scrollable-content">
-      <h2>اطلاعات تأمین‌کننده جدید</h2>
-      <input id="supplierName" placeholder="نام کامل تأمین‌کننده">
-      <input id="supplierPhone" placeholder="شماره موبایل" type="tel">
-      <select id="supplierProvince">
-        <option value="">انتخاب استان</option>
-        <option>تهران</option>
-        <option>خراسان رضوی</option>
-        <option>اصفهان</option>
-        <option>فارس</option>
-        <option>البرز</option>
-      </select>
-      <input id="supplierCity" placeholder="شهر">
-      <input id="supplierDistrict" placeholder="منطقه">
-      <input id="supplierProfit" placeholder="سود پیش‌فرض (%)" type="number">
-      <textarea id="supplierAddress" placeholder="آدرس کامل" rows="3"></textarea>
-      
-      <div class="action-buttons">
-        <button id="submitSupplierReg">
-          <span class="material-icons">save</span> ثبت اطلاعات
-        </button>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <h2>تأمین‌کنندگان ثبت‌شده</h2>
-      <div class="search-container">
-        <input id="searchSupplier" placeholder="جستجوی تأمین‌کننده...">
-        <button id="searchSupplierBtn">
-          <span class="material-icons">search</span>
-        </button>
-      </div>
-      
-      <table class="products-table" id="suppliersTable">
-        <thead>
-          <tr>
-            <th>نام</th>
-            <th>شماره</th>
-            <th>استان</th>
-            <th>شهر</th>
-            <th>منطقه</th>
-            <th>سود (%)</th>
-            <th>محصولات</th>
-          </tr>
-        </thead>
-        <tbody id="suppliersList">
-          <tr>
-            <td colspan="7">در حال بارگذاری...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  
-  <!-- تب محصولات تأمین‌کننده -->
-  <div class="tab-content" id="supplierProductsTab">
-    <div class="scrollable-content">
-      <h2>ثبت محصولات تأمین‌کننده</h2>
-      
-      <div class="search-container">
-        <select id="selectSupplier">
-          <option value="">انتخاب تأمین‌کننده</option>
-        </select>
-      </div>
-      
-      <div id="supplierInfo" class="supplier-info-box">
-        <p>تأمین‌کننده: <strong id="selectedSupplierName"></strong></p>
-        <p>شهر: <strong id="selectedSupplierCity"></strong></p>
-        <p>سود پیش‌فرض: <strong id="selectedSupplierProfit"></strong>%</p>
-      </div>
-      
-      <div class="action-buttons">
-        <button id="submitSupplierProducts">
-          <span class="material-icons">check_circle</span> ثبت نهایی محصولات
-        </button>
-      </div>
-      
-      <div class="basket-section">
-        <h3>سبد محصولات</h3>
-        <table class="products-table" id="basketTable" style="display: none;">
-          <thead>
-            <tr>
-              <th>نام</th>
-              <th>برند</th>
-              <th>حیوان</th>
-              <th>قیمت</th>
-              <th>حذف</th>
-            </tr>
-          </thead>
-          <tbody id="basketBody"></tbody>
-        </table>
-        <p id="emptyBasket">سبد محصولات خالی است</p>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <h3>جستجوی محصولات</h3>
-      <div class="search-container">
-        <input id="productSearch" placeholder="جستجوی نام محصول...">
-        <input id="brandSearch" placeholder="جستجوی برند...">
-        <button id="searchProductsBtn">
-          <span class="material-icons">search</span> جستجو
-        </button>
-      </div>
-      
-      <button id="addToBasket">
-        <span class="material-icons">add_shopping_cart</span> افزودن به سبد
-      </button>
-      
-      <table class="products-table">
-        <thead>
-          <tr>
-            <th>انتخاب</th>
-            <th>نام</th>
-            <th>برند</th>
-            <th>نوع حیوان</th>
-            <th>قیمت</th>
-          </tr>
-        </thead>
-        <tbody id="productResults">
-          <tr>
-            <td colspan="5">لطفاً ابتدا جستجو کنید</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  
-  <!-- تب افزودن محصول جدید -->
-  <div class="tab-content" id="addProductTab">
-    <div class="scrollable-content">
-      <h2>افزودن محصول جدید به سیستم</h2>
-      
-      <input id="newProductName" placeholder="نام محصول">
-      <input id="newProductBrand" placeholder="برند">
-      <select id="newProductAnimal">
-        <option value="">نوع حیوان</option>
-        <option>سگ</option>
-        <option>گربه</option>
-        <option>جوندگان</option>
-        <option>پرندگان</option>
-        <option>خزندگان</option>
-        <option>آبزیان</option>
-      </select>
-      <select id="newProductCategory">
-        <option value="">دسته‌بندی</option>
-        <option>تشویقی</option>
-        <option>غذای خشک</option>
-        <option>غذا</option>
-        <option>مکمل</option>
-        <option>لوازم جانبی</option>
-        <option>بهداشتی</option>
-      </select>
-      
-      <div class="action-buttons">
-        <button id="addProduct">
-          <span class="material-icons">save</span> ثبت محصول
-        </button>
-      </div>
-      
-      <div id="productMessage" style="margin-top: 15px;"></div>
-    </div>
-  </div>
-  
-  <!-- تب آپدیت نرخ -->
-  <div class="tab-content" id="updateRateTab">
-    <div class="scrollable-content">
-      <h2>به‌روزرسانی نرخ محصولات</h2>
-      
-      <div class="search-container">
-        <select id="searchSupplierUpdate">
-          <option value="">انتخاب تأمین‌کننده</option>
-        </select>
-        <input id="searchBrandUpdate" placeholder="برند محصول">
-        <input id="searchProductUpdate" placeholder="نام محصول">
-        <button id="updateSearch">
-          <span class="material-icons">search</span> جستجو
-        </button>
-      </div>
-      
-      <div id="updateResultsContainer" style="display: none; margin-top: 20px;">
-        <h3>نتایج جستجو</h3>
-        <table class="products-table">
-          <thead>
-            <tr>
-              <th>تأمین‌کننده</th>
-              <th>محصول</th>
-              <th>برند</th>
-              <th>قیمت فعلی</th>
-              <th>قیمت جدید</th>
-              <th>عملیات</th>
-            </tr>
-          </thead>
-          <tbody id="updateResults"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  
-  <!-- تب کش محصولات -->
-  <div class="tab-content" id="productCacheTab">
-    <div class="scrollable-content">
-      <h2>مدیریت کش محصولات</h2>
-      
-      <p>تعداد محصولات در کش: <strong id="cacheCount">0</strong></p>
-      <p>آخرین بروزرسانی: <strong id="lastUpdate">هرگز</strong></p>
-      
-      <div class="action-buttons">
-        <button id="refreshCache">
-          <span class="material-icons">refresh</span> بروزرسانی کش
-        </button>
-        <button id="clearCache">
-          <span class="material-icons">delete</span> پاک کردن کش
-        </button>
-      </div>
-      
-      <table class="products-table">
-        <thead>
-          <tr>
-            <th>نام محصول</th>
-            <th>برند</th>
-            <th>نوع حیوان</th>
-            <th>دسته‌بندی</th>
-          </tr>
-        </thead>
-        <tbody id="productCacheBody">
-          <tr>
-            <td colspan="4">داده‌ای وجود ندارد</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<!-- تب افزودن محصول -->
+<div class="tab-content" id="addTab">
+<div class="scrollable-content">
+<input id="newProductName" placeholder="نام محصول"/>
+<input id="newProductBrand" placeholder="برند"/>
+<select id="newProductAnimal">
+<option value="">نوع حیوان</option>
+<option>سگ</option>
+<option>گربه</option>
+<option>جوندگان</option>
+<option>پرندگان</option>
+<option>خزندگان</option>
+<option>آبزیان</option>
+</select>
+<select id="newProductCategory">
+<option value="">دسته‌بندی</option>
+<option>تشویقی</option>
+<option>غذای خشک</option>
+<option>غذا</option>
+<option>مکمل</option>
+<option>لوازم جانبی</option>
+<option>بهداشتی</option>
+</select>
+<input id="newProductPrice" placeholder="قیمت" class="price-input" type="number">
+<input id="newProductProfit" placeholder="سود (%)" class="profit-input" type="number">
+<div class="action-buttons">
+<button id="addToBasketNew"><span class="material-icons">add_shopping_cart</span> افزودن به سبد</button>
+<button id="submitNewProducts"><span class="material-icons">check_circle</span> ثبت نهایی محصولات</button>
+</div>
+<div class="basket-section">
+<h3>سبد محصولات جدید</h3>
+<table class="products-table" id="newBasketTable" style="display:none;">
+<thead>
+<tr>
+<th>نام</th>
+<th>برند</th>
+<th>حیوان</th>
+<th>دسته‌بندی</th>
+<th>قیمت</th>
+<th>سود (%)</th>
+<th>حذف</th>
+</tr>
+</thead>
+<tbody id="newBasketBody"></tbody>
+</table>
+<p id="emptyNewBasket">سبد محصولات خالی است</p>
+</div>
+</div>
+</div>
+
+<!-- تب آپدیت نرخ -->
+<div class="tab-content" id="updateTab">
+<div class="scrollable-content">
+<input id="searchName" placeholder="نام تأمین‌کننده"/>
+<input id="searchBrand" placeholder="برند محصول"/>
+<input id="searchProduct" placeholder="نام محصول"/>
+<button id="updateSearch"><span class="material-icons">search</span> جستجو</button>
+<table class="products-table">
+<thead>
+<tr>
+<th>نام تأمین‌کننده</th>
+<th>محصول</th>
+<th>برند</th>
+<th>قیمت فعلی</th>
+<th>سود فعلی</th>
+<th>قیمت جدید</th>
+<th>سود جدید</th>
+<th>عملیات</th>
+</tr>
+</thead>
+<tbody id="updateResults">
+<tr>
+<td colspan="8">برای نمایش نتایج جستجو کنید</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- تب کش محصولات -->
+<div class="tab-content" id="cacheTab">
+<div class="scrollable-content">
+<h2>مدیریت کش محصولات</h2>
+<p>تعداد محصولات در کش: <span id="cacheCount">0</span></p>
+<p>آخرین بروزرسانی: <span id="lastUpdate">هرگز</span></p>
+<button id="refreshCache"><span class="material-icons">refresh</span> بروزرسانی کش</button>
+<button id="clearCache"><span class="material-icons">delete</span> پاک کردن کش</button>
+<table class="products-table">
+<thead>
+<tr>
+<th>نام محصول</th>
+<th>برند</th>
+<th>نوع حیوان</th>
+<th>دسته‌بندی</th>
+</tr>
+</thead>
+<tbody id="productCacheBody">
+<tr>
+<td colspan="4">داده‌ای وجود ندارد</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
 <script>
@@ -759,66 +579,11 @@
   const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyZiwwiJn5oV9UqSgyaXCUOenDUEQu2g6meTo0UHz-d2fMppwKvtEodr2cCZMz0kriy/exec';
   let allProducts = [];
   let basket = [];
-  let allSuppliers = [];
+  let newProductsBasket = [];
   
   // عناصر DOM
   const loader = document.getElementById('loader');
   const toast = document.getElementById('toast');
-  const pageTitle = document.getElementById('pageTitle');
-  const menuOverlay = document.getElementById('menuOverlay');
-  
-  // --- مدیریت منوی همبرگر ---
-  const menuBtn = document.querySelector('.menu-btn');
-  const menuNav = document.querySelector('.menu-nav');
-  
-  menuBtn.addEventListener('click', () => {
-    menuBtn.classList.toggle('open');
-    menuNav.classList.toggle('open');
-    menuOverlay.classList.toggle('open');
-  });
-  
-  menuOverlay.addEventListener('click', () => {
-    menuBtn.classList.remove('open');
-    menuNav.classList.remove('open');
-    menuOverlay.classList.remove('open');
-  });
-  
-  // تغییر تب‌ها
-  document.querySelectorAll('.menu-nav__item').forEach(item => {
-    item.addEventListener('click', () => {
-      // تغییر وضعیت منو
-      document.querySelectorAll('.menu-nav__item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      menuBtn.classList.remove('open');
-      menuNav.classList.remove('open');
-      menuOverlay.classList.remove('open');
-      
-      // تغییر عنوان صفحه
-      pageTitle.textContent = item.textContent.trim();
-      
-      // تغییر تب
-      const tab = item.dataset.tab;
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.getElementById(`${tab}Tab`).classList.add('active');
-      
-      // بارگذاری داده‌های مورد نیاز
-      if (tab === 'productCache') loadProductsToCache();
-      if (tab === 'supplierReg') loadSuppliers();
-      if (tab === 'updateRate') updateSupplierDropdownForUpdate();
-    });
-  });
-  
-  // --- حالت شب ---
-  document.getElementById('darkToggle').addEventListener('change', function() {
-    document.body.classList.toggle('dark', this.checked);
-    localStorage.setItem('darkMode', this.checked);
-  });
-  
-  // بارگذاری حالت شب از localStorage
-  if (localStorage.getItem('darkMode') === 'true') {
-    document.getElementById('darkToggle').checked = true;
-    document.body.classList.add('dark');
-  }
   
   // --- توابع عمومی ---
   function showLoader() {
@@ -838,173 +603,131 @@
     }, 3000);
   }
   
-  // --- مدیریت تأمین‌کنندگان ---
-  async function loadSuppliers() {
-    showLoader();
-    try {
-      const response = await fetch(`${WEB_APP_URL}?action=getSuppliers`);
-      if (!response.ok) throw new Error('خطا در ارتباط با سرور');
-      
-      const data = await response.json();
-      
-      allSuppliers = data;
-      updateSuppliersUI();
-      updateSupplierDropdown();
-      updateSupplierDropdownForUpdate();
-      
-      return true;
-    } catch (error) {
-      console.error('خطا در بارگذاری تأمین‌کنندگان:', error);
-      showToast(error.message || 'خطا در دریافت داده از سرور', false);
-      return false;
-    } finally {
-      hideLoader();
-    }
-  }
-  
-  function updateSuppliersUI() {
-    const tbody = document.getElementById('suppliersList');
-    tbody.innerHTML = '';
+  function updateBasketUI() {
+    const basketTable = document.getElementById('basketTable');
+    const basketBody = document.getElementById('basketBody');
+    const emptyBasket = document.getElementById('emptyBasket');
     
-    if (allSuppliers.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7">تأمین‌کننده‌ای ثبت نشده است</td></tr>';
+    basketBody.innerHTML = '';
+    
+    if (basket.length === 0) {
+      basketTable.style.display = 'none';
+      emptyBasket.style.display = 'block';
       return;
     }
     
-    allSuppliers.forEach(supplier => {
+    emptyBasket.style.display = 'none';
+    basketTable.style.display = '';
+    
+    basket.forEach((item, index) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td>${supplier[0] || '-'}</td>
-        <td>${supplier[1] || '-'}</td>
-        <td>${supplier[2] || '-'}</td>
-        <td>${supplier[3] || '-'}</td>
-        <td>${supplier[4] || '-'}</td>
-        <td>${supplier[5] || '-'}</td>
-        <td>${supplier[6] || '0'}</td>
+        <td>${item.name}</td>
+        <td>${item.brand}</td>
+        <td>${item.animal}</td>
+        <td>${item.price.toLocaleString()}</td>
+        <td>${item.profit}</td>
+        <td><button onclick="removeFromBasket(${index})" class="material-icons" style="border:none;background:none;color:red;cursor:pointer;">delete</button></td>
       `;
-      tbody.appendChild(row);
+      basketBody.appendChild(row);
     });
   }
   
-  function updateSupplierDropdown() {
-    const select = document.getElementById('selectSupplier');
-    select.innerHTML = '<option value="">انتخاب تأمین‌کننده</option>';
+  function updateNewBasketUI() {
+    const basketTable = document.getElementById('newBasketTable');
+    const basketBody = document.getElementById('newBasketBody');
+    const emptyBasket = document.getElementById('emptyNewBasket');
     
-    allSuppliers.forEach(supplier => {
-      const option = document.createElement('option');
-      option.value = supplier[0];
-      option.textContent = `${supplier[0]} - ${supplier[3]} (${supplier[5]}%)`;
-      select.appendChild(option);
-    });
-  }
-  
-  function updateSupplierDropdownForUpdate() {
-    const select = document.getElementById('searchSupplierUpdate');
-    select.innerHTML = '<option value="">انتخاب تأمین‌کننده</option>';
+    basketBody.innerHTML = '';
     
-    allSuppliers.forEach(supplier => {
-      const option = document.createElement('option');
-      option.value = supplier[0];
-      option.textContent = supplier[0];
-      select.appendChild(option);
-    });
-  }
-  
-  // ثبت تأمین‌کننده جدید
-  document.getElementById('submitSupplierReg').addEventListener('click', async () => {
-    const name = document.getElementById('supplierName').value.trim();
-    const phone = document.getElementById('supplierPhone').value.trim();
-    const province = document.getElementById('supplierProvince').value;
-    const city = document.getElementById('supplierCity').value.trim();
-    const district = document.getElementById('supplierDistrict').value.trim();
-    const profit = document.getElementById('supplierProfit').value.trim();
-    const address = document.getElementById('supplierAddress').value.trim();
-    
-    if (!name || !phone || !province || !city || !profit) {
-      showToast('لطفاً اطلاعات ضروری را کامل کنید', false);
+    if (newProductsBasket.length === 0) {
+      basketTable.style.display = 'none';
+      emptyBasket.style.display = 'block';
       return;
     }
     
-    showLoader();
+    emptyBasket.style.display = 'none';
+    basketTable.style.display = '';
     
-    try {
-      const data = {
-        action: 'addSupplier',
-        name,
-        phone,
-        province,
-        city,
-        district,
-        profit,
-        address
-      };
+    newProductsBasket.forEach((item, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>${item.brand}</td>
+        <td>${item.animal}</td>
+        <td>${item.category}</td>
+        <td>${item.price.toLocaleString()}</td>
+        <td>${item.profit}</td>
+        <td><button onclick="removeFromNewBasket(${index})" class="material-icons" style="border:none;background:none;color:red;cursor:pointer;">delete</button></td>
+      `;
+      basketBody.appendChild(row);
+    });
+  }
+  
+  // --- مدیریت تب‌ها ---
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab, .tab-content').forEach(item => {
+        item.classList.remove('active');
+      });
       
-      const response = await fetch(`${WEB_APP_URL}?${new URLSearchParams(data)}`);
-      if (!response.ok) throw new Error('خطا در ارتباط با سرور');
+      tab.classList.add('active');
+      document.getElementById(`${tab.dataset.tab}Tab`).classList.add('active');
       
-      const result = await response.json();
-      
-      if (result.success) {
-        showToast('تأمین‌کننده با موفقیت ثبت شد');
-        
-        // پاک کردن فرم
-        document.getElementById('supplierName').value = '';
-        document.getElementById('supplierPhone').value = '';
-        document.getElementById('supplierProvince').value = '';
-        document.getElementById('supplierCity').value = '';
-        document.getElementById('supplierDistrict').value = '';
-        document.getElementById('supplierProfit').value = '';
-        document.getElementById('supplierAddress').value = '';
-        
-        // بروزرسانی لیست
-        await loadSuppliers();
-      } else {
-        throw new Error(result.error || 'خطا در ثبت اطلاعات');
+      // اگر تب کش فعال شد، داده‌ها را بارگذاری کن
+      if (tab.dataset.tab === 'cache') {
+        loadProductsToCache();
       }
-    } catch (error) {
-      showToast('خطا در ثبت تأمین‌کننده: ' + error.message, false);
-    } finally {
-      hideLoader();
-    }
+    });
   });
   
-  // --- مدیریت محصولات تأمین‌کننده ---
-  document.getElementById('selectSupplier').addEventListener('change', function() {
-    const supplierName = this.value;
-    if (!supplierName) {
-      document.getElementById('supplierInfo').style.display = 'none';
-      return;
-    }
-    
-    const supplier = allSuppliers.find(s => s[0] === supplierName);
-    if (supplier) {
-      document.getElementById('selectedSupplierName').textContent = supplier[0];
-      document.getElementById('selectedSupplierCity').textContent = supplier[3];
-      document.getElementById('selectedSupplierProfit').textContent = supplier[5];
-      document.getElementById('supplierInfo').style.display = 'block';
-    }
+  // --- حالت شب ---
+  document.getElementById('darkToggle').addEventListener('change', function() {
+    document.body.classList.toggle('dark', this.checked);
+    localStorage.setItem('darkMode', this.checked);
   });
+  
+  // بارگذاری حالت شب از localStorage
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.getElementById('darkToggle').checked = true;
+    document.body.classList.add('dark');
+  }
   
   // --- مدیریت کش محصولات ---
   async function loadProductsToCache() {
     showLoader();
     try {
+      // ابتدا از localStorage بارگذاری می‌کنیم
+      if (localStorage.getItem('productsCache')) {
+        allProducts = JSON.parse(localStorage.getItem('productsCache'));
+        document.getElementById('cacheCount').textContent = allProducts.length;
+        document.getElementById('lastUpdate').textContent = new Date(localStorage.getItem('lastCacheUpdate') || new Date()).toLocaleString('fa-IR');
+        
+        updateCacheTable();
+      }
+      
+      // سپس از سرور درخواست می‌دهیم
       const response = await fetch(`${WEB_APP_URL}?action=getProducts`);
-      if (!response.ok) throw new Error('خطا در ارتباط با سرور');
+      const serverProducts = await response.json();
       
-      const data = await response.json();
+      if (Array.isArray(serverProducts)) {
+        allProducts = serverProducts;
+        localStorage.setItem('productsCache', JSON.stringify(allProducts));
+        localStorage.setItem('lastCacheUpdate', new Date().toISOString());
+        
+        document.getElementById('cacheCount').textContent = allProducts.length;
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleString('fa-IR');
+        
+        updateCacheTable();
+        showToast('کش محصولات با موفقیت بروزرسانی شد');
+      }
       
-      allProducts = data;
-      updateCacheTable();
-      
-      document.getElementById('cacheCount').textContent = allProducts.length;
-      document.getElementById('lastUpdate').textContent = new Date().toLocaleString('fa-IR');
-      
-      showToast('کش محصولات با موفقیت بروزرسانی شد');
       return true;
     } catch (error) {
       console.error('خطا در بارگذاری کش:', error);
-      showToast(error.message || 'خطا در دریافت داده از سرور', false);
+      if (allProducts.length === 0) {
+        showToast('خطا در دریافت داده از سرور. از داده‌های محلی استفاده می‌شود', false);
+      }
       return false;
     } finally {
       hideLoader();
@@ -1036,6 +759,8 @@
   
   document.getElementById('clearCache').addEventListener('click', () => {
     allProducts = [];
+    localStorage.removeItem('productsCache');
+    localStorage.removeItem('lastCacheUpdate');
     document.getElementById('productCacheBody').innerHTML = '<tr><td colspan="4">داده‌ای وجود ندارد</td></tr>';
     document.getElementById('cacheCount').textContent = '0';
     document.getElementById('lastUpdate').textContent = 'هرگز';
@@ -1066,7 +791,7 @@
     tbody.innerHTML = '';
     
     if (filtered.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="5">محصولی یافت نشد</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6">محصولی یافت نشد</td></tr>';
       return;
     }
     
@@ -1078,6 +803,7 @@
         <td>${product[1] || '-'}</td>
         <td>${product[2] || '-'}</td>
         <td><input type="number" placeholder="قیمت" class="price-input"></td>
+        <td><input type="number" placeholder="سود" class="profit-input"></td>
       `;
       tbody.appendChild(row);
     });
@@ -1086,42 +812,7 @@
   document.getElementById('searchProductsBtn').addEventListener('click', filterProducts);
   
   // --- مدیریت سبد محصولات ---
-  function updateBasketUI() {
-    const basketTable = document.getElementById('basketTable');
-    const basketBody = document.getElementById('basketBody');
-    const emptyBasket = document.getElementById('emptyBasket');
-    
-    basketBody.innerHTML = '';
-    
-    if (basket.length === 0) {
-      basketTable.style.display = 'none';
-      emptyBasket.style.display = 'block';
-      return;
-    }
-    
-    emptyBasket.style.display = 'none';
-    basketTable.style.display = '';
-    
-    basket.forEach((item, index) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${item.name}</td>
-        <td>${item.brand}</td>
-        <td>${item.animal}</td>
-        <td>${item.price.toLocaleString()}</td>
-        <td><button onclick="removeFromBasket(${index})" class="material-icons" style="border:none;background:none;color:red;cursor:pointer;">delete</button></td>
-      `;
-      basketBody.appendChild(row);
-    });
-  }
-  
   document.getElementById('addToBasket').addEventListener('click', () => {
-    const supplier = document.getElementById('selectSupplier').value;
-    if (!supplier) {
-      showToast('لطفاً تأمین‌کننده را انتخاب کنید', false);
-      return;
-    }
-    
     if (allProducts.length === 0) {
       showToast('لطفاً ابتدا کش محصولات را بارگذاری کنید', false);
       return;
@@ -1136,8 +827,9 @@
       if (checkbox && checkbox.checked) {
         const cells = row.querySelectorAll('td');
         const priceInput = row.querySelector('.price-input');
+        const profitInput = row.querySelector('.profit-input');
         
-        if (!priceInput.value) {
+        if (!priceInput.value || !profitInput.value) {
           hasError = true;
           return;
         }
@@ -1146,17 +838,19 @@
           name: cells[1].textContent,
           brand: cells[2].textContent,
           animal: cells[3].textContent,
-          price: parseFloat(priceInput.value)
+          price: parseFloat(priceInput.value),
+          profit: profitInput.value
         });
         
         addedCount++;
         checkbox.checked = false;
         priceInput.value = '';
+        profitInput.value = '';
       }
     });
     
     if (hasError) {
-      showToast('لطفاً قیمت را برای تمام محصولات انتخاب شده وارد کنید', false);
+      showToast('لطفاً قیمت و سود را برای تمام محصولات انتخاب شده وارد کنید', false);
       return;
     }
     
@@ -1168,17 +862,105 @@
     }
   });
   
+  // --- افزودن محصول جدید به سبد ---
+  document.getElementById('addToBasketNew').addEventListener('click', () => {
+    const name = document.getElementById('newProductName').value.trim();
+    const brand = document.getElementById('newProductBrand').value.trim();
+    const animal = document.getElementById('newProductAnimal').value;
+    const category = document.getElementById('newProductCategory').value;
+    const price = document.getElementById('newProductPrice').value;
+    const profit = document.getElementById('newProductProfit').value;
+    
+    if (!name || !brand || !animal || !category || !price || !profit) {
+      showToast('لطفاً تمام فیلدهای ضروری را پر کنید', false);
+      return;
+    }
+    
+    newProductsBasket.push({
+      name,
+      brand,
+      animal,
+      category,
+      price: parseFloat(price),
+      profit
+    });
+    
+    // پاک کردن فیلدها
+    document.getElementById('newProductName').value = '';
+    document.getElementById('newProductBrand').value = '';
+    document.getElementById('newProductAnimal').value = '';
+    document.getElementById('newProductCategory').value = '';
+    document.getElementById('newProductPrice').value = '';
+    document.getElementById('newProductProfit').value = '';
+    
+    updateNewBasketUI();
+    showToast('محصول جدید به سبد اضافه شد');
+  });
+  
+  // --- ثبت نهایی محصولات جدید ---
+  document.getElementById('submitNewProducts').addEventListener('click', async () => {
+    if (newProductsBasket.length === 0) {
+      showToast('سبد محصولات خالی است', false);
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      for (const item of newProductsBasket) {
+        // اول محصول را اضافه می‌کنیم
+        const productData = {
+          action: 'addProduct',
+          name: item.name,
+          brand: item.brand,
+          animal: item.animal,
+          category: item.category
+        };
+        
+        const productResponse = await fetch(`${WEB_APP_URL}?${new URLSearchParams(productData)}`);
+        const productResult = await productResponse.json();
+        
+        if (!productResult.success) {
+          throw new Error(productResult.error || 'خطا در ثبت محصول');
+        }
+      }
+      
+      // پاک کردن سبد پس از ثبت موفق
+      newProductsBasket = [];
+      updateNewBasketUI();
+      
+      // بروزرسانی کش
+      await loadProductsToCache();
+      
+      showToast('محصولات جدید با موفقیت ثبت شدند');
+    } catch (error) {
+      showToast('خطا در ثبت محصولات: ' + error.message, false);
+    } finally {
+      hideLoader();
+    }
+  });
+  
   window.removeFromBasket = function(index) {
     basket.splice(index, 1);
     updateBasketUI();
     showToast('محصول از سبد حذف شد');
   };
   
-  // ثبت محصولات تأمین‌کننده
-  document.getElementById('submitSupplierProducts').addEventListener('click', async () => {
-    const supplierName = document.getElementById('selectSupplier').value;
-    if (!supplierName) {
-      showToast('لطفاً تأمین‌کننده را انتخاب کنید', false);
+  window.removeFromNewBasket = function(index) {
+    newProductsBasket.splice(index, 1);
+    updateNewBasketUI();
+    showToast('محصول از سبد حذف شد');
+  };
+  
+  // --- ثبت تأمین‌کننده ---
+  document.getElementById('submitSupplier').addEventListener('click', async () => {
+    const name = document.getElementById('supplierName').value.trim();
+    const phone = document.getElementById('supplierPhone').value.trim();
+    const province = document.getElementById('supplierProvince').value;
+    const city = document.getElementById('supplierCity').value.trim();
+    
+    if (!name || !phone || !province || !city) {
+      showToast('لطفاً اطلاعات تأمین‌کننده را کامل کنید', false);
       return;
     }
     
@@ -1190,25 +972,21 @@
     showLoader();
     
     try {
-      const supplier = allSuppliers.find(s => s[0] === supplierName);
-      if (!supplier) {
-        throw new Error('تأمین‌کننده یافت نشد');
-      }
-      
       for (const item of basket) {
         const data = {
-          action: 'addSupplierProduct',
-          supplierName,
+          action: 'addSupplier',
+          name,
+          phone,
+          province,
+          city,
           productName: item.name,
           brand: item.brand,
           animal: item.animal,
           price: item.price,
-          profit: supplier[5] // استفاده از سود پیش‌فرض تأمین‌کننده
+          profitPercent: item.profit
         };
         
         const response = await fetch(`${WEB_APP_URL}?${new URLSearchParams(data)}`);
-        if (!response.ok) throw new Error('خطا در ارتباط با سرور');
-        
         const result = await response.json();
         
         if (!result.success) {
@@ -1216,73 +994,28 @@
         }
       }
       
-      // پاک کردن سبد
+      // پاک کردن فرم و سبد پس از ثبت موفق
+      document.getElementById('supplierName').value = '';
+      document.getElementById('supplierPhone').value = '';
+      document.getElementById('supplierProvince').value = '';
+      document.getElementById('supplierCity').value = '';
+      
       basket = [];
       updateBasketUI();
       
-      // بروزرسانی لیست تأمین‌کنندگان
-      await loadSuppliers();
-      
-      showToast('محصولات با موفقیت ثبت شدند');
+      showToast('اطلاعات تأمین‌کننده با موفقیت ثبت شد');
     } catch (error) {
-      showToast('خطا در ثبت محصولات: ' + error.message, false);
+      showToast('خطا در ثبت اطلاعات: ' + error.message, false);
     } finally {
       hideLoader();
     }
   });
   
-  // --- افزودن محصول جدید ---
-  document.getElementById('addProduct').addEventListener('click', async () => {
-    const name = document.getElementById('newProductName').value.trim();
-    const brand = document.getElementById('newProductBrand').value.trim();
-    const animal = document.getElementById('newProductAnimal').value;
-    const category = document.getElementById('newProductCategory').value;
-    
-    if (!name || !brand || !animal || !category) {
-      showToast('لطفاً تمام فیلدهای ضروری را پر کنید', false);
-      return;
-    }
-    
-    showLoader();
-    
-    try {
-      const data = {
-        action: 'addProduct',
-        name,
-        brand,
-        animal,
-        category
-      };
-      
-      const response = await fetch(`${WEB_APP_URL}?${new URLSearchParams(data)}`);
-      if (!response.ok) throw new Error('خطا در ارتباط با سرور');
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        showToast('محصول با موفقیت اضافه شد');
-        document.getElementById('newProductName').value = '';
-        document.getElementById('newProductBrand').value = '';
-        document.getElementById('newProductAnimal').value = '';
-        document.getElementById('newProductCategory').value = '';
-        
-        // بروزرسانی کش
-        await loadProductsToCache();
-      } else {
-        throw new Error(result.error || 'خطا در ثبت محصول');
-      }
-    } catch (error) {
-      showToast('خطا در افزودن محصول: ' + error.message, false);
-    } finally {
-      hideLoader();
-    }
-  });
-  
-  // --- آپدیت نرخ‌ها ---
+  // --- بروزرسانی نرخ‌ها ---
   document.getElementById('updateSearch').addEventListener('click', async () => {
-    const name = document.getElementById('searchSupplierUpdate').value.trim();
-    const brand = document.getElementById('searchBrandUpdate').value.trim();
-    const product = document.getElementById('searchProductUpdate').value.trim();
+    const name = document.getElementById('searchName').value.trim();
+    const brand = document.getElementById('searchBrand').value.trim();
+    const product = document.getElementById('searchProduct').value.trim();
     
     if (!name && !brand && !product) {
       showToast('حداقل یک فیلد جستجو را پر کنید', false);
@@ -1293,21 +1026,15 @@
     
     try {
       const response = await fetch(`${WEB_APP_URL}?action=searchForUpdate&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&product=${encodeURIComponent(product)}`);
-      if (!response.ok) throw new Error('خطا در ارتباط با سرور');
-      
       const data = await response.json();
       
-      const container = document.getElementById('updateResultsContainer');
       const tbody = document.getElementById('updateResults');
       tbody.innerHTML = '';
       
       if (data.length === 0) {
-        container.style.display = 'none';
-        showToast('موردی یافت نشد', false);
+        tbody.innerHTML = '<tr><td colspan="8">موردی یافت نشد</td></tr>';
         return;
       }
-      
-      container.style.display = 'block';
       
       data.forEach((item, index) => {
         const row = document.createElement('tr');
@@ -1316,8 +1043,10 @@
           <td>${item[4]}</td>
           <td>${item[5]}</td>
           <td>${item[7] ? item[7].toLocaleString() : '-'}</td>
+          <td>${item[8] || '-'}%</td>
           <td><input type="number" id="newPrice${index}" placeholder="قیمت جدید" class="price-input"></td>
-          <td><button onclick="updateSupplierRate(${index}, '${item[0]}', '${item[4]}', '${item[5]}')" class="update-btn">ذخیره</button></td>
+          <td><input type="number" id="newProfit${index}" placeholder="سود جدید" class="profit-input"></td>
+          <td><button onclick="updateSupplierRate(${index}, '${item[0]}', '${item[4]}', '${item[5]}')" class="material-icons" style="border:none;background:none;color:#3498db;cursor:pointer;">save</button></td>
         `;
         tbody.appendChild(row);
       });
@@ -1330,18 +1059,17 @@
   
   window.updateSupplierRate = async function(index, name, product, brand) {
     const newPrice = document.getElementById(`newPrice${index}`).value;
+    const newProfit = document.getElementById(`newProfit${index}`).value;
     
-    if (!newPrice) {
-      showToast('لطفاً قیمت جدید را وارد کنید', false);
+    if (!newPrice || !newProfit) {
+      showToast('لطفاً قیمت و سود جدید را وارد کنید', false);
       return;
     }
     
     showLoader();
     
     try {
-      const response = await fetch(`${WEB_APP_URL}?action=updateRate&name=${encodeURIComponent(name)}&product=${encodeURIComponent(product)}&brand=${encodeURIComponent(brand)}&price=${newPrice}`);
-      if (!response.ok) throw new Error('خطا در ارتباط با سرور');
-      
+      const response = await fetch(`${WEB_APP_URL}?action=updateRate&name=${encodeURIComponent(name)}&product=${encodeURIComponent(product)}&brand=${encodeURIComponent(brand)}&price=${newPrice}&profit=${newProfit}`);
       const result = await response.json();
       
       if (result.success) {
@@ -1359,22 +1087,11 @@
   
   // بارگذاری اولیه
   document.addEventListener('DOMContentLoaded', async () => {
-    // بارگذاری لوگو از شیت بیس
-    try {
-      const response = await fetch(`${WEB_APP_URL}?action=getLogo`);
-      if (!response.ok) throw new Error('خطا در دریافت لوگو');
-      
-      const logoUrl = await response.json();
-      if (logoUrl) {
-        document.getElementById('companyLogo').src = logoUrl;
-      }
-    } catch (error) {
-      console.error('خطا در دریافت لوگو:', error);
-    }
-    
-    // بارگذاری داده‌های اولیه
-    await loadSuppliers();
+    // بارگذاری کش
     await loadProductsToCache();
+    
+    // فعال کردن تب اول
+    document.querySelector('[data-tab="select"]').click();
   });
 </script>
 </body>
