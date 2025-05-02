@@ -73,6 +73,7 @@
       border-radius: 4px;
       background: inherit;
       color: inherit;
+      font-size: 0.9rem;
     }
     
     button {
@@ -89,7 +90,7 @@
     
     .small-btn {
       padding: 5px 10px;
-      font-size: 0.9em;
+      font-size: 0.8em;
       width: auto;
       display: inline-block;
     }
@@ -111,7 +112,7 @@
       align-items: center;
       gap: 5px;
       color: #333;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
     
     .tab.active { 
@@ -141,17 +142,18 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
+      font-size: 0.75rem;
     }
     
     .products-table th, 
     .products-table td {
       border: 1px solid #ddd;
-      padding: 8px;
+      padding: 6px;
       text-align: center;
     }
     
     .checkbox-large {
-      transform: scale(1.5);
+      transform: scale(1.3);
       margin: 0 auto;
       display: block;
     }
@@ -161,11 +163,11 @@
       margin: 15px 0;
     }
     
-    #addToBasket {
+    #addToBasket, #addToBasketNew {
       background: #27ae60;
     }
     
-    #addToBasket:hover {
+    #addToBasket:hover, #addToBasketNew:hover {
       background: #219653;
     }
     
@@ -179,6 +181,7 @@
       border-radius: 4px;
       display: none;
       z-index: 10000;
+      font-size: 0.9rem;
     }
     
     .toast.error {
@@ -197,7 +200,7 @@
       align-items: center;
       z-index: 9999;
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
     
     .loader.active { 
@@ -282,6 +285,7 @@
     
     .action-buttons button {
       flex: 1;
+      font-size: 0.9rem;
     }
     
     .search-container {
@@ -292,11 +296,13 @@
     
     .search-container input {
       flex: 1;
+      font-size: 0.9rem;
     }
     
     .search-container button {
       width: auto;
       padding: 10px 15px;
+      font-size: 0.8rem;
     }
     
     .scrollable-content {
@@ -304,9 +310,17 @@
       overflow-y: auto;
       padding: 5px;
     }
+    
+    .price-input, .profit-input {
+      width: 100%;
+      padding: 8px;
+      font-size: 0.9rem;
+      margin: 5px 0;
+    }
   
     select option {
       color: #000 !important;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
@@ -316,10 +330,45 @@
         gap: 6px;
         justify-content: center;
       }
+      
       .tab {
         flex: 1 1 45%;
-        min-width: 120px;
+        min-width: 100px;
         text-align: center;
+        font-size: 0.7rem;
+        padding: 6px 8px;
+      }
+      
+      .products-table {
+        font-size: 0.65rem;
+      }
+      
+      .products-table th, 
+      .products-table td {
+        padding: 4px;
+      }
+      
+      input, select, button {
+        padding: 8px;
+        font-size: 0.8rem;
+      }
+      
+      .price-input, .profit-input {
+        width: 100%;
+        font-size: 0.8rem;
+      }
+      
+      .action-buttons button {
+        font-size: 0.8rem;
+        padding: 8px;
+      }
+      
+      .material-icons {
+        font-size: 18px;
+      }
+      
+      .scrollable-content {
+        max-height: calc(100vh - 220px);
       }
     }
 
@@ -406,8 +455,8 @@
 <th>نام</th>
 <th>برند</th>
 <th>نوع حیوان</th>
-<th style="width:150px;">قیمت</th>
-<th style="width:120px;">سود (%)</th>
+<th>قیمت</th>
+<th>سود (%)</th>
 </tr>
 </thead>
 <tbody id="productResults">
@@ -442,8 +491,30 @@
 <option>لوازم جانبی</option>
 <option>بهداشتی</option>
 </select>
-<button id="addProduct"><span class="material-icons">save</span> ثبت محصول</button>
-<div id="productMessage" style="margin-top:10px;"></div>
+<input id="newProductPrice" placeholder="قیمت" class="price-input" type="number">
+<input id="newProductProfit" placeholder="سود (%)" class="profit-input" type="number">
+<div class="action-buttons">
+<button id="addToBasketNew"><span class="material-icons">add_shopping_cart</span> افزودن به سبد</button>
+<button id="submitNewProducts"><span class="material-icons">check_circle</span> ثبت نهایی محصولات</button>
+</div>
+<div class="basket-section">
+<h3>سبد محصولات جدید</h3>
+<table class="products-table" id="newBasketTable" style="display:none;">
+<thead>
+<tr>
+<th>نام</th>
+<th>برند</th>
+<th>حیوان</th>
+<th>دسته‌بندی</th>
+<th>قیمت</th>
+<th>سود (%)</th>
+<th>حذف</th>
+</tr>
+</thead>
+<tbody id="newBasketBody"></tbody>
+</table>
+<p id="emptyNewBasket">سبد محصولات خالی است</p>
+</div>
 </div>
 </div>
 
@@ -508,6 +579,7 @@
   const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyZiwwiJn5oV9UqSgyaXCUOenDUEQu2g6meTo0UHz-d2fMppwKvtEodr2cCZMz0kriy/exec';
   let allProducts = [];
   let basket = [];
+  let newProductsBasket = [];
   
   // عناصر DOM
   const loader = document.getElementById('loader');
@@ -553,9 +625,40 @@
         <td>${item.name}</td>
         <td>${item.brand}</td>
         <td>${item.animal}</td>
-        <td>${item.price}</td>
+        <td>${item.price.toLocaleString()}</td>
         <td>${item.profit}</td>
         <td><button onclick="removeFromBasket(${index})" class="material-icons" style="border:none;background:none;color:red;cursor:pointer;">delete</button></td>
+      `;
+      basketBody.appendChild(row);
+    });
+  }
+  
+  function updateNewBasketUI() {
+    const basketTable = document.getElementById('newBasketTable');
+    const basketBody = document.getElementById('newBasketBody');
+    const emptyBasket = document.getElementById('emptyNewBasket');
+    
+    basketBody.innerHTML = '';
+    
+    if (newProductsBasket.length === 0) {
+      basketTable.style.display = 'none';
+      emptyBasket.style.display = 'block';
+      return;
+    }
+    
+    emptyBasket.style.display = 'none';
+    basketTable.style.display = '';
+    
+    newProductsBasket.forEach((item, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>${item.brand}</td>
+        <td>${item.animal}</td>
+        <td>${item.category}</td>
+        <td>${item.price.toLocaleString()}</td>
+        <td>${item.profit}</td>
+        <td><button onclick="removeFromNewBasket(${index})" class="material-icons" style="border:none;background:none;color:red;cursor:pointer;">delete</button></td>
       `;
       basketBody.appendChild(row);
     });
@@ -735,7 +838,7 @@
           name: cells[1].textContent,
           brand: cells[2].textContent,
           animal: cells[3].textContent,
-          price: priceInput.value,
+          price: parseFloat(priceInput.value),
           profit: profitInput.value
         });
         
@@ -759,9 +862,93 @@
     }
   });
   
+  // --- افزودن محصول جدید به سبد ---
+  document.getElementById('addToBasketNew').addEventListener('click', () => {
+    const name = document.getElementById('newProductName').value.trim();
+    const brand = document.getElementById('newProductBrand').value.trim();
+    const animal = document.getElementById('newProductAnimal').value;
+    const category = document.getElementById('newProductCategory').value;
+    const price = document.getElementById('newProductPrice').value;
+    const profit = document.getElementById('newProductProfit').value;
+    
+    if (!name || !brand || !animal || !category || !price || !profit) {
+      showToast('لطفاً تمام فیلدهای ضروری را پر کنید', false);
+      return;
+    }
+    
+    newProductsBasket.push({
+      name,
+      brand,
+      animal,
+      category,
+      price: parseFloat(price),
+      profit
+    });
+    
+    // پاک کردن فیلدها
+    document.getElementById('newProductName').value = '';
+    document.getElementById('newProductBrand').value = '';
+    document.getElementById('newProductAnimal').value = '';
+    document.getElementById('newProductCategory').value = '';
+    document.getElementById('newProductPrice').value = '';
+    document.getElementById('newProductProfit').value = '';
+    
+    updateNewBasketUI();
+    showToast('محصول جدید به سبد اضافه شد');
+  });
+  
+  // --- ثبت نهایی محصولات جدید ---
+  document.getElementById('submitNewProducts').addEventListener('click', async () => {
+    if (newProductsBasket.length === 0) {
+      showToast('سبد محصولات خالی است', false);
+      return;
+    }
+    
+    showLoader();
+    
+    try {
+      for (const item of newProductsBasket) {
+        // اول محصول را اضافه می‌کنیم
+        const productData = {
+          action: 'addProduct',
+          name: item.name,
+          brand: item.brand,
+          animal: item.animal,
+          category: item.category
+        };
+        
+        const productResponse = await fetch(`${WEB_APP_URL}?${new URLSearchParams(productData)}`);
+        const productResult = await productResponse.json();
+        
+        if (!productResult.success) {
+          throw new Error(productResult.error || 'خطا در ثبت محصول');
+        }
+      }
+      
+      // پاک کردن سبد پس از ثبت موفق
+      newProductsBasket = [];
+      updateNewBasketUI();
+      
+      // بروزرسانی کش
+      await loadProductsToCache();
+      
+      showToast('محصولات جدید با موفقیت ثبت شدند');
+    } catch (error) {
+      showToast('خطا در ثبت محصولات: ' + error.message, false);
+    } finally {
+      hideLoader();
+    }
+  });
+  
   window.removeFromBasket = function(index) {
     basket.splice(index, 1);
     updateBasketUI();
+    showToast('محصول از سبد حذف شد');
+  };
+  
+  window.removeFromNewBasket = function(index) {
+    newProductsBasket.splice(index, 1);
+    updateNewBasketUI();
     showToast('محصول از سبد حذف شد');
   };
   
@@ -824,51 +1011,6 @@
     }
   });
   
-  // --- افزودن محصول جدید ---
-  document.getElementById('addProduct').addEventListener('click', async () => {
-    const name = document.getElementById('newProductName').value.trim();
-    const brand = document.getElementById('newProductBrand').value.trim();
-    const animal = document.getElementById('newProductAnimal').value;
-    const category = document.getElementById('newProductCategory').value;
-    
-    if (!name || !brand || !animal || !category) {
-      showToast('لطفاً تمام فیلدهای ضروری را پر کنید', false);
-      return;
-    }
-    
-    showLoader();
-    
-    try {
-      const data = {
-        action: 'addProduct',
-        name,
-        brand,
-        animal,
-        category
-      };
-      
-      const response = await fetch(`${WEB_APP_URL}?${new URLSearchParams(data)}`);
-      const result = await response.json();
-      
-      if (result.success) {
-        showToast('محصول با موفقیت اضافه شد');
-        document.getElementById('newProductName').value = '';
-        document.getElementById('newProductBrand').value = '';
-        document.getElementById('newProductAnimal').value = '';
-        document.getElementById('newProductCategory').value = '';
-        
-        // بروزرسانی کش
-        await loadProductsToCache();
-      } else {
-        throw new Error(result.error || 'خطا در ثبت محصول');
-      }
-    } catch (error) {
-      showToast('خطا در افزودن محصول: ' + error.message, false);
-    } finally {
-      hideLoader();
-    }
-  });
-  
   // --- بروزرسانی نرخ‌ها ---
   document.getElementById('updateSearch').addEventListener('click', async () => {
     const name = document.getElementById('searchName').value.trim();
@@ -900,10 +1042,10 @@
           <td>${item[0]}</td>
           <td>${item[4]}</td>
           <td>${item[5]}</td>
-          <td>${item[7]}</td>
-          <td>${item[8]}%</td>
-          <td><input type="number" id="newPrice${index}" placeholder="قیمت جدید"></td>
-          <td><input type="number" id="newProfit${index}" placeholder="سود جدید"></td>
+          <td>${item[7] ? item[7].toLocaleString() : '-'}</td>
+          <td>${item[8] || '-'}%</td>
+          <td><input type="number" id="newPrice${index}" placeholder="قیمت جدید" class="price-input"></td>
+          <td><input type="number" id="newProfit${index}" placeholder="سود جدید" class="profit-input"></td>
           <td><button onclick="updateSupplierRate(${index}, '${item[0]}', '${item[4]}', '${item[5]}')" class="material-icons" style="border:none;background:none;color:#3498db;cursor:pointer;">save</button></td>
         `;
         tbody.appendChild(row);
