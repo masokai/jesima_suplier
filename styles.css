@@ -438,3 +438,118 @@ button:hover {
 .theme-toggle input:checked + .theme-slider:before {
   transform: translateX(26px);
 }
+/* اضافه کردن این استایل‌ها به فایل CSS */
+
+/* برای دستگاه‌های با عرض کمتر از 768px */
+@media (max-width: 768px) {
+  body {
+    padding-top: 70px;
+  }
+  
+  .header-sticky {
+    padding: 10px 15px;
+  }
+  
+  #pageTitle {
+    font-size: 1.2rem;
+    margin-right: 10px;
+  }
+  
+  .hamburger {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .menu {
+    width: 280px;
+  }
+  
+  .form-container {
+    padding: 15px;
+    margin: 0 10px;
+  }
+  
+  input, select, button, textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .products-table th, 
+  .products-table td {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+  
+  .supplier-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .supplier-form-grid textarea {
+    grid-column: span 1 !important;
+  }
+}
+
+/* برای دستگاه‌های بسیار کوچک (عرض کمتر از 480px) */
+@media (max-width: 480px) {
+  body {
+    padding-top: 60px;
+  }
+  
+  .menu {
+    width: 85%;
+    right: -85%;
+  }
+  
+  .toast {
+    right: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+    max-width: none;
+  }
+  
+  .checkbox-large {
+    transform: scale(1.8);
+  }
+}
+
+/* بهبود نمایش جداول در موبایل */
+@media (max-width: 600px) {
+  .products-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* بهبود فرم‌ها در موبایل */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+@media (max-width: 768px) {
+  .menu-item {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .menu-title {
+    font-size: 1.1rem;
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 768px) {
+  button {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+.products-table td {
+  word-break: break-word;
+  white-space: normal;
+}
